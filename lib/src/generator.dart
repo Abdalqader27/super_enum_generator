@@ -1,9 +1,9 @@
 import 'package:analyzer/dart/element/element.dart';
-import 'package:super_enum/super_enum.dart';
-import 'package:super_enum_generator/src/class_generator.dart';
-import 'package:source_gen/source_gen.dart';
 import 'package:build/build.dart';
 import 'package:dart_style/dart_style.dart';
+import 'package:source_gen/source_gen.dart';
+import 'package:super_enum/super_enum.dart';
+import 'package:super_enum_generator/src/class_generator.dart';
 
 Builder superEnumGeneratorFactoryBuilder() => PartBuilder(
       [SuperEnumGenerator()],
@@ -22,8 +22,7 @@ Builder superEnumGeneratorFactoryBuilder() => PartBuilder(
 
 class SuperEnumGenerator extends GeneratorForAnnotation<SuperEnum> {
   @override
-  generateForAnnotatedElement(
-      Element element, ConstantReader annotation, BuildStep buildStep) {
-    return ClassGenerator(element).generate(DartFormatter());
+  generateForAnnotatedElement(Element element, ConstantReader annotation, BuildStep buildStep) {
+    return ClassGenerator(element as dynamic).generate(DartFormatter());
   }
 }

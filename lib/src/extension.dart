@@ -1,6 +1,5 @@
 String getCamelCase(String text, {String separator = ''}) {
-  List<String> words =
-      _groupIntoWords(text).map(_upperCaseFirstLetter).toList();
+  List<String> words = _groupIntoWords(text)!.map(_upperCaseFirstLetter).toList();
   words[0] = words[0].toLowerCase();
 
   return words.join(separator);
@@ -20,9 +19,7 @@ List<String> _groupIntoWords(String text) {
 
   for (int i = 0; i < text.length; i++) {
     String char = String.fromCharCode(text.codeUnitAt(i));
-    String nextChar = (i + 1 == text.length
-        ? null
-        : String.fromCharCode(text.codeUnitAt(i + 1)));
+    String? nextChar = (i + 1 == text.length ? null : String.fromCharCode(text.codeUnitAt(i + 1)));
 
     if (_symbolRegex.hasMatch(char)) {
       continue;
@@ -30,9 +27,8 @@ List<String> _groupIntoWords(String text) {
 
     sb.write(char);
 
-    bool isEndOfWord = nextChar == null ||
-        (_upperAlphaRegex.hasMatch(nextChar) && !isAllCaps) ||
-        _symbolRegex.hasMatch(nextChar);
+    bool isEndOfWord =
+        nextChar == null || (_upperAlphaRegex.hasMatch(nextChar) && !isAllCaps) || _symbolRegex.hasMatch(nextChar);
 
     if (isEndOfWord) {
       words.add(sb.toString());
